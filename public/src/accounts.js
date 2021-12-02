@@ -14,18 +14,19 @@ function getTotalNumberOfBorrows(accounts, books) {
   books.forEach(book => book.borrows.forEach(borrow => acc === borrow.id && total++));
   return total;
 }
+
+
 function getBooksPossessedByAccount(account, books, authors) {
-  let booksOut = [];
+  const booksOut = [];
   books.forEach(book=>{
-    if (book.borrows.find(items=>items.id === account.id && !items.returned)) {
+    if (book.borrows.find(borrow =>borrow.id === account.id && !borrow.returned)) {
       booksOut.push(book);
     }
   })
-  booksOut.forEach(book=>{
-    let author = authors.find(borrower => borrower.id === book.authorId);
-    book['author'] = author;
+  return booksOut.map(book=>{
+    const author = authors.find(author => author.id === book.authorId);
+    return {...book,author}
   })
-  return booksOut;
 }
 
 
