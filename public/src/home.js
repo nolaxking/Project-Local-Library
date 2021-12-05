@@ -2,18 +2,20 @@ function getTotalBooksCount(books) {
   let count = books.length 
   return count 
 }
-
+function counter(arr){
+  return arr.length 
+}
 function getTotalAccountsCount(accounts) {
-  let count = accounts.length
-  return count 
+  return counter(accounts)
 }
 
 function getBooksBorrowedCount(books) {
-  let booksCheckedOut = books.filter(
-   (book) =>
-    book.borrows.filter((record) => record.returned === false).length > 0
-  );
-  return booksCheckedOut.length;
+ return books.reduce((total, {borrows})=>{
+  if(borrows[0].returned === false)
+  total++
+  return total
+ },0)
+
  }
 
 
